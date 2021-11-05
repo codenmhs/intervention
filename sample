@@ -1,0 +1,237 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+% For including images
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=15mm,
+ top=5mm,
+ right=15mm,
+ }
+ \usepackage{dirtytalk}
+ % For drawing trees
+ \usepackage{forest}
+ % For continuing the numbering from one enumerate section to another.
+ \usepackage{enumitem}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Math Intervention}
+\newcommand\hwnumber{6}                  % <-- homework number
+\newcommand\NetIDa{Name: }           % <-- NetID of person #1
+\newcommand\NetIDb{Date}           % <-- NetID of person #2 (Comment this line out for problem sets)
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+%\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Assignment \hwnumber}}
+%\rhead{\course \\ \today}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+% Macro for larger inline fractions from user Mico at https://tex.stackexchange.com/questions/173899/fractions-with-large-elements
+\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+
+\begin{document}
+
+\section*{Dividing is Multiplying by the Multiplicative Inverse}
+
+Now that we know how to factor, let's learn what dividing really means.  Then we'll be ready to do arithmetic with any \textbf{rational numbers} (numbers that can be written as fractions).
+
+For any two numbers x and y, 
+
+\[\frac{x}{y} := x * y^{-1} \]
+
+where
+
+\(y^{-1} \), the \textbf{multiplicative inverse} of y \( := \) The number which, when multiplied by y, gives 1: \[y * y^{-1} = y^{-1} * y = 1\]
+
+As an example, the multiplicative inverse of 3 is 1/3: \[3 * \frac{1}{3} = \frac{1}{3} * 3 = 1 \]
+
+This definition, combined with the commutative property of multiplication, provides the means to simplify, multiply, and add fractions.
+
+\section*{Simplifying Fractions}
+
+Take a fraction: \[\frac{12}{3}\]
+
+
+Factor the numerator and the denominator: 
+
+\begin{center} \begin{forest} for tree={
+    edge path={\noexpand\path[\forestoption{edge}] (\forestOve{\forestove{@parent}}{name}.parent anchor) -- +(0,-12pt)-| (\forestove{name}.child anchor)\forestoption{edge label};}
+}
+[
+    12
+        [2]
+        [6 
+            [2]
+            [3]
+        ]
+    ]
+]
+\end{forest} \end{center}
+
+, while 3 is already factored. So:  \[\frac{12}{3} = \frac{2 * 2 * 3}{3} = 2 * 2 * 3 * 3^{-1}\]
+
+If the numerator and denominator share some factor x, we can remove it from both without affecting the value of the whole fraction, because: 
+
+\begin{enumerate}
+    \item The fraction is now represented by a product which contains two terms of the form \[x * x^{-1}\]
+    \item The product of any number and its multiplicative inverse is 1.
+    \item Multiplying by 1 does not affect the whole product. 
+\end{enumerate}
+
+Here are those rules applied step by step: 
+
+\[2 * 2 * 3 * 3^{-1} = 2 * 2 * 1 = 2 * 2 = 4 \]
+
+Note that the second and third steps are usually taught as a single step, where one visually eliminates a shared factor by crossing it out.  However, students taught this way often do not know what is left after cancelling, or think that 0 is left instead of 1.  You now know what cancelling means and why it works.
+
+Here are a few more examples.
+\[ \frac{3}{15} = \frac{3}{3 * 5}=3 * 3^{-1} *5^{-1}=1 * 5^{-1}=\frac{1}{5} \]
+
+\[\frac{60}{12} = \frac{2 * 2 * 3 * 5}{2 * 2 * 3} = 2 * 2 * 3 * 5 * 2^{-1}* 2^{-1}* 3^{-1} = 2 * 2^{-1} * 2 * 2^{-1} * 3 * 3^{-1} * 5 = 1 * 1 * 1 * 5 = 5 \]
+
+\[\frac{-20}{8} = -\frac{20}{8} = -\frac{2 * 2 * 5}{2 * 2 * 2} = -(2 * 2 * 5 * 2^{-1}* 2^{-1}* 2^{-1}) = -(2 * 2^{-1} * 2 * 2^{-1} * 5 * 2^{-1}) = -\frac{5}{2} \]
+
+Where the third equality for \( \ddfrac{60}{12} \) follows from the commutative property (we can multiply in any order).
+
+\section*{Simplifying Fractions Practice}
+% Rest of the work...
+
+Simplify each fraction using the method above.  \textbf{Simplify} means ``write an equivalent expression which involves the smallest possible numbers and the fewest possible operations."
+
+\begin{enumerate}
+    \item \(\ddfrac{2}{10} =\) \vspace{4em}
+    \item \(\ddfrac{10}{2} =\) \vspace{4em}
+    \item \(\ddfrac{7}{14} =\) \vspace{4em}
+    \item \(\ddfrac{7}{14} =\) \vspace{4em}
+    \item \(\ddfrac{35}{14} =\) \vspace{4em}
+    \item \(\ddfrac{-35}{14} =\) \vspace{4em}
+    \item \(\ddfrac{-35}{-14} =\) \vspace{4em}
+    \item \(\ddfrac{256}{512} =\) \vspace{10em}
+\end{enumerate}
+
+\section*{Multiplying Fractions}
+
+Remember how I made a big deal out of the order of subtraction mattering, but the order of adding the inverse being unimportant?  Notice that the same thing is going on with division.  
+
+The algorithm for multiplying fractions is to multiply the numerators and multiply the denominators: 
+
+\[\frac{2}{3} * \frac{1}{2} = \frac{2 * 1}{3 * 2} = \frac{2}{6} \]
+
+Know we know why this works: 
+
+\[\frac{2}{3} * \frac{1}{2} = 2 * 3^{-1} * 1 * 2^{-1} = 2 * 1 * 3^{-1} * 2^{-1} = \frac{2}{6} \]
+
+Multiplying fractions is just an application of the commutative rule for multiplication - we're just moving around the order in which we multiply the numbers from the numerator and denominator.
+
+Note that writing fraction products this way makes it easy to do some of our simplifying at the same time: 
+
+\[2 * 1 * 3^{-1} * 2^{-1} = 2 * 2^{-1} * 1 * 3^{-1} = 1 * 1 * 3^{-1} = \frac{1}{3} \]
+
+\section*{Practice Multiplying Fractions}
+
+Compute.  Simplify the answer as much as possible.  Specifically, write an answer in the form \(\ddfrac{p}{q} \) where p and q are integers with no common factors.
+
+\begin{enumerate}
+
+    \item \(\ddfrac{3}{4} * \ddfrac{1}{2} = \) \vspace{4em}
+    \item \(\ddfrac{5}{7} * \ddfrac{1}{5} = \) \vspace{4em}
+    \item \(\ddfrac{20}{3} * \ddfrac{6}{12} = \) \vspace{4em}
+    \item \(\ddfrac{-1}{3} * \ddfrac{-9}{2} = \) \vspace{4em}
+    \item \(\ddfrac{7}{3} * \ddfrac{-9}{-2} = \) \vspace{4em}
+    \item \(\ddfrac{-1}{3} * \ddfrac{52}{6} = \) \vspace{4em}
+    \item \(\ddfrac{3}{10} * \ddfrac{3}{11} = \) \vspace{4em}
+    \item \(\ddfrac{-4}{3} * \ddfrac{3}{5} = \) \vspace{4em}
+    \item \(\ddfrac{-4}{-5} * \ddfrac{-3}{7} = \) \vspace{4em}
+    \item \(\ddfrac{1}{99} * \ddfrac{11}{2} = \) \vspace{4em}
+    \item \(\ddfrac{-7}{3} * \ddfrac{15}{9} = \) \vspace{4em}
+
+\end{enumerate}
+
+\section*{Adding Fractions}
+
+Case 1: The fractions have the same denominator.  In this case, we can add the numerators across.  Use your knowledge of arithmetic rules to prove the following statement in problem 1: 
+
+\[ \frac{a}{c} + \frac{b}{c} = \frac{a + b}{c} \]
+
+Case 2: The fractions have different denominators.  
+
+In this case, we use a little trick to restate the expression as a Case 1. 
+
+\[ \frac{a}{c} + \frac{b}{d} = \frac{a}{c}*\frac{d}{d} + \frac{b}{d}*\frac{c}{c}\]
+
+Now the denominators are each \(c * d\), so we can add the numerators per the rule for a Case 1. 
+
+\[\frac{a}{c}*\frac{d}{d} + \frac{b}{d}*\frac{c}{c} = \frac{a * d + b * c}{c * d} \]
+
+This rule works for ANY fractions \(\ddfrac{a}{c}\) and \(\ddfrac{b}{d}\).  
+
+Now, it may be that sum of fractions found this way has common factors on the top and bottom, ie, is not fully simplified.  You may have heard some business about Lowest Common Multiples and Greatest Common Divisors and so forth; these allow us to compute the sum of fractions and end up with a reduced fraction.  However, they also tend to cause great confusion, so I advise that you simply learn the rule for Case 2 fractions, and simplify at the end. 
+
+\section*{Practice Adding Fractions}
+
+\begin{enumerate}
+ \item I will show you some geometric intuition for adding fractions in class.  Draw what I show you to represent \( \ddfrac{1}{2} + \ddfrac{1}{3} \) here.  \vspace{15em}
+% \includegraphics[width=10cm, height=7cm]{thirds}
+\end{enumerate}
+
+Evaluate and simplify each of the following sums: 
+
+\begin{enumerate}[resume]
+    \item \(\ddfrac{3}{4} + \ddfrac{1}{2} = \) \vspace{4em}
+    \item \(\ddfrac{5}{7} + \ddfrac{1}{5} = \) \vspace{4em}
+    \item \(\ddfrac{20}{3} + \ddfrac{6}{12} = \) \vspace{4em}
+    \item \(\ddfrac{-1}{3} + \ddfrac{-9}{2} = \) \vspace{4em}
+    \item \(\ddfrac{7}{3} + \ddfrac{-9}{-2} = \) \vspace{4em}
+    \item \(\ddfrac{-1}{3} + \ddfrac{52}{6} = \) \vspace{4em}
+    \item \(\ddfrac{3}{10} + \ddfrac{3}{11} = \) \vspace{4em}
+    \item \(\ddfrac{-4}{3} + \ddfrac{3}{5} = \) \vspace{4em}
+    \item \(\ddfrac{-4}{-5} + \ddfrac{-3}{7} = \) \vspace{4em}
+    \item \(\ddfrac{1}{99} + \ddfrac{11}{2} = \) \vspace{4em}
+    \item \(\ddfrac{-7}{3} + \ddfrac{15}{9} = \) \vspace{4em}
+    \item \(\ddfrac{12}{3} + \ddfrac{3}{12} = \) \vspace{4em}
+    \item \(\ddfrac{9}{2} + \ddfrac{500}{2} = \) \vspace{4em}
+    \item \(\ddfrac{3}{1} + \ddfrac{4}{6} = \) \vspace{4em}
+\end{enumerate}
+\end{document}
