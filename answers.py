@@ -38,12 +38,17 @@ class Expression:
 
     
 if __name__ == '__main__': 
+    # These work.  Don't know why they need a "\\" to start, while below expressions only need "\frac..."
     # ex = Expression("\\frac{d}{dx} x^{2}")
-    ex = Expression("\\frac{256}{512}")
-    print(ex.reduce())
+    # ex = Expression("\\frac{256}{512}")
+    # print(ex.reduce())
     
-    lines = test_exprns.splitlines()
-    for line in lines: 
-        line = re.sub("item", '', line)
-        line = re.sub('space{*}', '', line)
-        print(line)
+    # \(, followed by any number of any character, followed by \)
+    exprn = re.compile(r'\\\(.*\\\)')
+    stend = re.compile(r'(\\\()|(=.*\\\))')
+    ddfrac = re.compile('ddfrac')
+    for item in exprn.findall(test_exprns): 
+        item = stend.sub('', item)
+        item = ddfrac.sub('frac', item)
+        sy_exp = Expression(item)
+        print(str(item) + str(sy_exp.reduce()))
