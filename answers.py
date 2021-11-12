@@ -1,8 +1,10 @@
-from fractions import Fraction as Fr
-# from latex2sympy import process_sympy as pl
 import sympy
 from sympy.parsing.latex import parse_latex as pl
 import re
+import sys
+# useful alternatives: 
+# from fractions import Fraction as Fr
+# from latex2sympy import process_sympy as pl
 
 class Expression: 
     def __init__(self, string):
@@ -12,7 +14,7 @@ class Expression:
     
     @classmethod
     def from_tex(cls, tex_string): 
-        # Return an Expression object given a Tex expression
+        '''Given a Tex expression, return an Expression object'''
         return cls(cls.text_to_sympy(tex_string))
         
     @staticmethod
@@ -51,8 +53,14 @@ if __name__ == '__main__':
     # ex = Expression("\\frac{d}{dx} x^{2}")
     # ex = Expression("\\frac{256}{512}")
     # print(ex.reduce())
+    
+    filename = 'sample1.txt'
+    if sys.argv[1]: 
+        filename = sys.argv[1]
+        print(type(filename))
+        print(filename)
 
-    for item in Expression.exprns_from_file('sample.txt'):
+    for item in Expression.exprns_from_file(filename):
         simplified = ''
         if not re.search('[a-zA-Z]', str(item)): 
             # If there are no variables in the expression, reduce it
