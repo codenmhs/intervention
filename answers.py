@@ -54,11 +54,11 @@ if __name__ == '__main__':
     # ex = Expression("\\frac{256}{512}")
     # print(ex.reduce())
     
-    filename = 'sample1.txt'
-    if sys.argv[1]: 
-        filename = sys.argv[1]
-        print(type(filename))
-        print(filename)
+    filename = 'sample.txt'
+    # if sys.argv[1]: 
+        # filename = sys.argv[1]
+        # print(type(filename))
+        # print(filename)
 
     for item in Expression.exprns_from_file(filename):
         simplified = ''
